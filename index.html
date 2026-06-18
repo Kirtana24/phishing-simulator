@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎣 Phishing Email Simulator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎣 Phishing Email Simulator</h1>
+            <p class="subtitle">Learn to identify phishing attacks in a safe environment</p>
+        </header>
+
+        <div class="warning-banner">
+            ⚠️ <strong>Educational Purpose Only:</strong> This simulator is for security awareness training.
+        </div>
+
+        <main>
+            <section class="scenario-selector">
+                <h2>Choose a Scenario</h2>
+                <div class="scenario-grid">
+                    <button class="scenario-btn" data-scenario="bank">🏦 Bank Alert</button>
+                    <button class="scenario-btn" data-scenario="social">📱 Social Media</button>
+                    <button class="scenario-btn" data-scenario="work">💼 Work Email</button>
+                    <button class="scenario-btn" data-scenario="shopping">🛍️ Shopping</button>
+                    <button class="scenario-btn" data-scenario="tech">💻 Tech Support</button>
+                    <button class="scenario-btn" data-scenario="random">🎲 Random</button>
+                </div>
+            </section>
+
+            <section class="simulation-area" id="simulationArea">
+                <div class="placeholder">
+                    <p>👆 Select a scenario above to start</p>
+                    <p class="hint">You'll see an email and decide if it's phishing or legitimate</p>
+                </div>
+            </section>
+
+            <section class="stats" id="stats">
+                <div class="stat-box">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Detected</span>
+                    <span class="stat-value" id="detected">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Missed</span>
+                    <span class="stat-value" id="missed">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Total</span>
+                    <span class="stat-value" id="total">0</span>
+                </div>
+            </section>
+
+            <button class="reset-btn" id="resetBtn">🔄 Reset Progress</button>
+        </main>
+    </div>
+
+    <script src="js/simulator.js"></script>
+</body>
+</html>
