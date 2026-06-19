@@ -59,10 +59,10 @@ phishing-simulator/
 🎓 How to Use
 Select a Scenario - Choose from 6 different phishing scenarios
 
-Read the Email - Analyze the email carefully
-Make a Decision - Click "Phishing" or "Legitimate"
-Learn from Feedback - Read explanations of red flags
-Track Your Score - See your progress in real-time
+1.Read the Email - Analyze the email carefully
+2.Make a Decision - Click "Phishing" or "Legitimate"
+3.Learn from Feedback - Read explanations of red flags
+4.Track Your Score - See your progress in real-time
 
 💡 Pro Tips
 🕵️ Hover over links to see the real URL (don't click!)
