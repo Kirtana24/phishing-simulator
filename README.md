@@ -71,13 +71,11 @@ Track Your Score - See your progress in real-time
 👤 Look for personalization - Legitimate emails use your name
 
 🔒 Educational Purpose
+
 ⚠️ IMPORTANT: This tool is designed strictly for educational and awareness purposes. It simulates phishing attacks to help users recognize and avoid real threats. Never use this knowledge for malicious purposes.
 
 SCREENSHOTS
 Main Interface
 <img width="1918" height="1013" alt="image" src="https://github.com/user-attachments/assets/f2b17d75-5e4c-4d39-a831-79036a8ad099" />
-
-1. Email Simulator
-<img width="1892" height="1015" alt="image" src="https://github.com/user-attachments/assets/c5170b1d-038c-47ef-a017-6318085e933c" />
 
 
