@@ -65,15 +65,15 @@ Select a Scenario - Choose from 6 different phishing scenarios
 4. Track your score : See your progress in real time
 
 
-💡 Pro Tips
-🕵️ Hover over links to see the real URL (don't click!)
-🔍 Check the sender - Look for suspicious domains
-⏰ Watch for urgency - Real emails don't rush you
-👤 Look for personalization - Legitimate emails use your name
+💡Pro Tips
+~ Hover over links to see the real URL (don't click!)
+~ Check the sender -Look for suspicious domains
+~ Watch the urgency - Real emails don't rush you
+~ Look for personalization - Legitimate emails use your name
 
 🔒 Educational Purpose
 
-⚠️ IMPORTANT: This tool is designed strictly for educational and awareness purposes. It simulates phishing attacks to help users recognize and avoid real threats. Never use this knowledge for malicious purposes.
+⚠️ IMPORTANT: This tool is designed strictly for educational and awareness purposes.It simulates phishimg attacks to help users recognize and avoid real threats. Never use this knowledge for malicious purposes. 
 
 SCREENSHOTS
 Main Interface
