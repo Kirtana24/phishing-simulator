@@ -136,7 +136,6 @@ class PhishingDetector {
             status = 'caution';
             confidence = 'Low';
         }
-
         return {
             riskScore: riskScore,
             redFlags: redFlags,
@@ -214,8 +213,6 @@ class PhishingDetector {
         return html;
     }
 }
-
-
 // ============================================
 // PHISHING SIMULATOR
 // ============================================
