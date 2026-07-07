@@ -1,6 +1,7 @@
 // ============================================
 // PHISHING DETECTION ENGINE
 // ============================================
+
 class PhishingDetector {
     static analyzeEmail(emailContent, sender = '', subject = '') {
         const redFlags = [];
@@ -8,6 +9,7 @@ class PhishingDetector {
 
         const fullContent = `From: ${sender}\nSubject: ${subject}\n\n${emailContent}`;
 
+        // ----- 1. CHECK FOR URGENCY LANGUAGE -----
         const urgentWords = [
             'urgent', 'immediately', 'asap', 'now', 'quick', 'hurry',
             'suspended', 'locked', 'blocked', 'closed', 'terminated',
@@ -22,6 +24,7 @@ class PhishingDetector {
             }
         });
 
+        // ----- 2. CHECK FOR SUSPICIOUS SENDER DOMAINS -----
         const fakeDomains = [
             'chase-bank.secure.com', 'faceb00k-login.com', 
             'amaz0n-support.com', 'outlook-servers.net',
@@ -37,6 +40,7 @@ class PhishingDetector {
             });
         }
 
+        // ----- 3. CHECK FOR SUSPICIOUS LINKS -----
         const urlPattern = /https?:\/\/[^\s<>"]+/g;
         const urls = fullContent.match(urlPattern) || [];
         
@@ -63,7 +67,7 @@ class PhishingDetector {
             });
         });
 
-
+        // ----- 4. CHECK FOR GENERIC GREETINGS -----
         const genericGreetings = ['dear customer', 'dear user', 'dear sir', 'dear madam', 'hello there'];
         genericGreetings.forEach(greeting => {
             if (fullContent.toLowerCase().includes(greeting)) {
@@ -72,6 +76,7 @@ class PhishingDetector {
             }
         });
 
+        // ----- 5. CHECK FOR PERSONAL INFORMATION REQUESTS -----
         const sensitiveTerms = [
             'password', 'credit card', 'social security', 'ssn', 
             'bank account', 'routing number', 'pin', 'otp',
@@ -84,6 +89,7 @@ class PhishingDetector {
             }
         });
 
+        // ----- 6. CHECK FOR SPELLING/GRAMMAR ISSUES -----
         const commonMisspellings = [
             'recieve', 'seperate', 'definately', 'occured', 'untill',
             'addres', 'accomodate', 'priviledge', 'maintainance'
@@ -95,12 +101,14 @@ class PhishingDetector {
             }
         });
 
+        // ----- 7. CHECK FOR ATTACHMENT WARNINGS -----
         if (fullContent.toLowerCase().includes('attachment') || 
             fullContent.toLowerCase().includes('download')) {
             redFlags.push('⚠️ Email mentions attachments (common attack vector)');
             riskScore += 10;
         }
 
+        // ----- 8. CHECK FOR THREATS -----
         const threats = ['suspended', 'locked', 'blocked', 'closed', 'terminated', 'cancelled'];
         threats.forEach(threat => {
             if (fullContent.toLowerCase().includes(threat)) {
@@ -109,6 +117,7 @@ class PhishingDetector {
             }
         });
 
+        // ----- 9. DOMAIN SPOOFING CHECK -----
         const legitDomains = ['amazon.com', 'paypal.com', 'microsoft.com', 'google.com', 'facebook.com'];
         legitDomains.forEach(domain => {
             const baseDomain = domain.split('.')[0];
@@ -122,6 +131,7 @@ class PhishingDetector {
             }
         });
 
+        // ----- 10. CALCULATE FINAL SCORE -----
         riskScore = Math.min(riskScore, 100);
         
         let status = 'safe';
