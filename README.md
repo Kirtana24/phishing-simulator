@@ -83,8 +83,8 @@ cd backend
 
 📊 Detection Features
 Feature	                                           Description
-Urgency                                   Detection	Identifies keywords like "urgent", "immediately", "suspended"
-Domain Analysis                           Checks for fake domains and spoofing attempts
+Urgency                                  Detection	Identifies keywords like "urgent", "immediately", "suspended"
+Domain Analysis                          Checks for fake domains and spoofing attempts
 URL Inspection	                          Detects IP addresses, suspicious TLDs, and malicious patterns
 Risk Scoring	                            0-100 score with High/Medium/Low confidence
 Red Flag Reporting	                      Lists all detected issues with explanations
@@ -99,7 +99,8 @@ Scenario (Bank alert)
 
 Scenario (Social Media)
 <img width="1898" height="867" alt="image" src="https://github.com/user-attachments/assets/06ed2459-db35-4b56-a0a9-eb9f23c6c753" />
-<img width="1897" height="862" alt="image" src="https://github.com/user-attachments/assets/701b55ec-5c25-4ff8-9677-bdc7adc8fdba" />
+<img width="1895" height="507" alt="image" src="https://github.com/user-attachments/assets/faf1878b-71d3-44c0-ba9b-2181913735b6" />
+
 
  Educational Purpose
 ⚠️ This tool is designed strictly for educational and awareness purposes. Use responsibly and only in authorized environments.
