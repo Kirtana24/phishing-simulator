@@ -90,14 +90,17 @@ Risk Scoring	                            0-100 score with High/Medium/Low confid
 Red Flag Reporting	                      Lists all detected issues with explanations
 
 OUTPUT SCREENSHOTS
-Main homepage
+Main 
+homepage
 <img width="1917" height="861" alt="image" src="https://github.com/user-attachments/assets/696fb27e-603c-42d2-985b-813760bacc23" />
 
-Scenario (Bank alert)
+Scenario 
+(Bank alert)
 <img width="1897" height="866" alt="image" src="https://github.com/user-attachments/assets/00434773-b32b-4d53-823d-7c90cab3d0a4" />
-<img width="1897" height="862" alt="image" src="https://github.com/user-attachments/assets/48735384-1438-4cf2-97cf-7fca6d7f4aa0" />
+<img width="1897" height="633" alt="image" src="https://github.com/user-attachments/assets/73581717-5c35-403b-b63a-4ed308b255cc" />
 
-Scenario (Social Media)
+Scenario 
+(Social Media)
 <img width="1898" height="867" alt="image" src="https://github.com/user-attachments/assets/06ed2459-db35-4b56-a0a9-eb9f23c6c753" />
 <img width="1895" height="507" alt="image" src="https://github.com/user-attachments/assets/faf1878b-71d3-44c0-ba9b-2181913735b6" />
 
