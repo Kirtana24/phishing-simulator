@@ -89,9 +89,21 @@ URL Inspection	                          Detects IP addresses, suspicious TLDs, 
 Risk Scoring	                            0-100 score with High/Medium/Low confidence
 Red Flag Reporting	                      Lists all detected issues with explanations
 
+OUTPUT SCREENSHOTS
+Main homepage
+<img width="1917" height="861" alt="image" src="https://github.com/user-attachments/assets/696fb27e-603c-42d2-985b-813760bacc23" />
+
+Scenario (Bank alert)
+<img width="1897" height="866" alt="image" src="https://github.com/user-attachments/assets/00434773-b32b-4d53-823d-7c90cab3d0a4" />
+<img width="1897" height="862" alt="image" src="https://github.com/user-attachments/assets/48735384-1438-4cf2-97cf-7fca6d7f4aa0" />
+
+Scenario (Social Media)
+<img width="1898" height="867" alt="image" src="https://github.com/user-attachments/assets/06ed2459-db35-4b56-a0a9-eb9f23c6c753" />
+<img width="1897" height="862" alt="image" src="https://github.com/user-attachments/assets/701b55ec-5c25-4ff8-9677-bdc7adc8fdba" />
+
  Educational Purpose
 ⚠️ This tool is designed strictly for educational and awareness purposes. Use responsibly and only in authorized environments.
 
- Author
+Author
 Kirtana Minoy
 GitHub: Kirtana24
