@@ -1,3 +1,236 @@
+// ============================================
+// PHISHING DETECTION ENGINE
+// ============================================
+
+class PhishingDetector {
+    static analyzeEmail(emailContent, sender = '', subject = '') {
+        const redFlags = [];
+        let riskScore = 0;
+
+        const fullContent = `From: ${sender}\nSubject: ${subject}\n\n${emailContent}`;
+
+        // ----- 1. CHECK FOR URGENCY LANGUAGE -----
+        const urgentWords = [
+            'urgent', 'immediately', 'asap', 'now', 'quick', 'hurry',
+            'suspended', 'locked', 'blocked', 'closed', 'terminated',
+            'verify', 'confirm', 'validate', 'secure', 'update',
+            'unauthorized', 'suspicious', 'compromised', 'breach'
+        ];
+        
+        urgentWords.forEach(word => {
+            if (fullContent.toLowerCase().includes(word)) {
+                redFlags.push(`⚠️ Contains urgency keyword: "${word}"`);
+                riskScore += 8;
+            }
+        });
+
+        // ----- 2. CHECK FOR SUSPICIOUS SENDER DOMAINS -----
+        const fakeDomains = [
+            'chase-bank.secure.com', 'faceb00k-login.com', 
+            'amaz0n-support.com', 'outlook-servers.net',
+            'micros0ft.com', 'g00gle.com', 'paypa1.com'
+        ];
+
+        if (sender) {
+            fakeDomains.forEach(domain => {
+                if (sender.toLowerCase().includes(domain)) {
+                    redFlags.push(`⚠️ Suspicious sender domain: ${domain}`);
+                    riskScore += 25;
+                }
+            });
+        }
+
+        // ----- 3. CHECK FOR SUSPICIOUS LINKS -----
+        const urlPattern = /https?:\/\/[^\s<>"]+/g;
+        const urls = fullContent.match(urlPattern) || [];
+        
+        urls.forEach(url => {
+            const suspiciousPatterns = ['secure', 'verify', 'login', 'account', 'update', 'confirm'];
+            suspiciousPatterns.forEach(pattern => {
+                if (url.toLowerCase().includes(pattern)) {
+                    redFlags.push(`⚠️ Suspicious link: ${url}`);
+                    riskScore += 20;
+                }
+            });
+            
+            if (url.match(/https?:\/\/\d+\.\d+\.\d+\.\d+/)) {
+                redFlags.push(`⚠️ Link uses IP address instead of domain: ${url}`);
+                riskScore += 30;
+            }
+            
+            const suspiciousTLDs = ['.tk', '.ml', '.ga', '.cf', '.pw', '.top', '.xyz', '.club'];
+            suspiciousTLDs.forEach(tld => {
+                if (url.toLowerCase().includes(tld)) {
+                    redFlags.push(`⚠️ Suspicious TLD in URL: ${tld}`);
+                    riskScore += 15;
+                }
+            });
+        });
+
+        // ----- 4. CHECK FOR GENERIC GREETINGS -----
+        const genericGreetings = ['dear customer', 'dear user', 'dear sir', 'dear madam', 'hello there'];
+        genericGreetings.forEach(greeting => {
+            if (fullContent.toLowerCase().includes(greeting)) {
+                redFlags.push(`⚠️ Generic greeting: "${greeting}" (not personalized)`);
+                riskScore += 10;
+            }
+        });
+
+        // ----- 5. CHECK FOR PERSONAL INFORMATION REQUESTS -----
+        const sensitiveTerms = [
+            'password', 'credit card', 'social security', 'ssn', 
+            'bank account', 'routing number', 'pin', 'otp',
+            'date of birth', 'driving license'
+        ];
+        sensitiveTerms.forEach(term => {
+            if (fullContent.toLowerCase().includes(term)) {
+                redFlags.push(`⚠️ Requests sensitive information: "${term}"`);
+                riskScore += 20;
+            }
+        });
+
+        // ----- 6. CHECK FOR SPELLING/GRAMMAR ISSUES -----
+        const commonMisspellings = [
+            'recieve', 'seperate', 'definately', 'occured', 'untill',
+            'addres', 'accomodate', 'priviledge', 'maintainance'
+        ];
+        commonMisspellings.forEach(word => {
+            if (fullContent.toLowerCase().includes(word)) {
+                redFlags.push(`⚠️ Possible spelling error: "${word}" (common in phishing)`);
+                riskScore += 5;
+            }
+        });
+
+        // ----- 7. CHECK FOR ATTACHMENT WARNINGS -----
+        if (fullContent.toLowerCase().includes('attachment') || 
+            fullContent.toLowerCase().includes('download')) {
+            redFlags.push('⚠️ Email mentions attachments (common attack vector)');
+            riskScore += 10;
+        }
+
+        // ----- 8. CHECK FOR THREATS -----
+        const threats = ['suspended', 'locked', 'blocked', 'closed', 'terminated', 'cancelled'];
+        threats.forEach(threat => {
+            if (fullContent.toLowerCase().includes(threat)) {
+                redFlags.push(`⚠️ Contains threat: "${threat}" (creates urgency)`);
+                riskScore += 10;
+            }
+        });
+
+        // ----- 9. DOMAIN SPOOFING CHECK -----
+        const legitDomains = ['amazon.com', 'paypal.com', 'microsoft.com', 'google.com', 'facebook.com'];
+        legitDomains.forEach(domain => {
+            const baseDomain = domain.split('.')[0];
+            if (fullContent.toLowerCase().includes(baseDomain)) {
+                if (fullContent.toLowerCase().includes(baseDomain + '0') || 
+                    fullContent.toLowerCase().includes(baseDomain + '-secure') ||
+                    fullContent.toLowerCase().includes(baseDomain + '-login')) {
+                    redFlags.push(`⚠️ Possible domain spoofing targeting: ${domain}`);
+                    riskScore += 25;
+                }
+            }
+        });
+
+        // ----- 10. CALCULATE FINAL SCORE -----
+        riskScore = Math.min(riskScore, 100);
+        
+        let status = 'safe';
+        let confidence = 'Low';
+        
+        if (riskScore >= 70) {
+            status = 'phishing';
+            confidence = 'High';
+        } else if (riskScore >= 40) {
+            status = 'suspicious';
+            confidence = 'Medium';
+        } else if (riskScore >= 20) {
+            status = 'caution';
+            confidence = 'Low';
+        }
+
+        return {
+            riskScore: riskScore,
+            redFlags: redFlags,
+            status: status,
+            confidence: confidence,
+            isPhishing: riskScore >= 50,
+            urlCount: urls.length,
+            hasSuspiciousSender: redFlags.some(f => f.includes('sender domain')),
+            hasSuspiciousLinks: redFlags.some(f => f.includes('link')),
+            hasUrgency: redFlags.some(f => f.includes('urgency'))
+        };
+    }
+
+    static generateDetectionHTML(result) {
+        const statusColors = {
+            'phishing': '#dc3545',
+            'suspicious': '#ffc107',
+            'caution': '#fd7e14',
+            'safe': '#28a745'
+        };
+        
+        const statusIcons = {
+            'phishing': '🚨',
+            'suspicious': '⚠️',
+            'caution': '⚡',
+            'safe': '✅'
+        };
+        
+        const statusLabels = {
+            'phishing': 'PHISHING DETECTED',
+            'suspicious': 'Suspicious',
+            'caution': 'Caution',
+            'safe': 'Safe'
+        };
+        
+        let html = `
+            <div class="detection-result" style="margin-top:20px;padding:15px;border-radius:8px;background:#f8f9fa;border-left:4px solid ${statusColors[result.status]};">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+                    <div>
+                        <span style="font-size:1.5rem;">${statusIcons[result.status]}</span>
+                        <strong style="color:${statusColors[result.status]};">${statusLabels[result.status]}</strong>
+                        <span style="margin-left:10px;font-size:0.9rem;color:#666;">Risk Score: ${result.riskScore}/100</span>
+                        <span style="margin-left:10px;font-size:0.9rem;color:#666;">Confidence: ${result.confidence}</span>
+                    </div>
+                </div>
+        `;
+        
+        if (result.redFlags.length > 0) {
+            html += `
+                <div style="margin-top:10px;">
+                    <strong>🔍 Detected Red Flags:</strong>
+                    <ul style="margin-top:5px;padding-left:20px;margin-bottom:0;">
+                        ${result.redFlags.map(flag => `<li style="color:#721c24;margin-bottom:3px;">${flag}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        } else {
+            html += `
+                <div style="margin-top:10px;">
+                    <span style="color:#28a745;">✅ No red flags detected. This email appears safe.</span>
+                </div>
+            `;
+        }
+        
+        html += `
+                <div style="margin-top:10px;font-size:0.9rem;color:#666;border-top:1px solid #e0e0e0;padding-top:10px;">
+                    📊 Analysis Summary: ${result.urlCount} URLs found | 
+                    ${result.hasSuspiciousSender ? '⚠️ Suspicious sender' : '✅ Sender looks normal'} | 
+                    ${result.hasSuspiciousLinks ? '⚠️ Suspicious links' : '✅ Links look normal'} |
+                    ${result.hasUrgency ? '⚠️ Urgency detected' : '✅ No urgency detected'}
+                </div>
+            </div>
+        `;
+        
+        return html;
+    }
+}
+
+
+// ============================================
+// PHISHING SIMULATOR
+// ============================================
+
 class PhishingSimulator {
     constructor() {
         this.score = 0;
@@ -225,6 +458,14 @@ class PhishingSimulator {
         const isCorrect = decision === scenario.type;
         const feedback = document.getElementById('feedback');
         
+        // --- RUN DETECTION ANALYSIS ON THE EMAIL ---
+        const fullEmailContent = `From: ${scenario.from}\nSubject: ${scenario.subject}\n\n${scenario.body}`;
+        const detectionResult = PhishingDetector.analyzeEmail(
+            fullEmailContent,
+            scenario.from,
+            scenario.subject
+        );
+        
         if (isCorrect) {
             this.score += 10;
             if (decision === 'phishing') this.detected++;
@@ -233,8 +474,10 @@ class PhishingSimulator {
             feedback.className = 'feedback show correct';
             feedback.innerHTML = `
                 <h4>✅ Correct!</h4>
-                <p>You correctly identified this as ${decision === 'phishing' ? 'phishing' : 'legitimate'}.</p>
+                <p>You correctly identified this as ${decision === 'phishing' ? 'PHISHING' : 'LEGITIMATE'}.</p>
                 ${this.getExplanation(scenario)}
+                <hr style="margin:15px 0;border-top:2px dashed #ccc;">
+                ${PhishingDetector.generateDetectionHTML(detectionResult)}
             `;
         } else {
             if (decision === 'phishing') this.missed++;
@@ -242,9 +485,11 @@ class PhishingSimulator {
             
             feedback.className = 'feedback show incorrect';
             feedback.innerHTML = `
-                <h4>❌ Not quite right.</h4>
+                <h4>❌ Not quite right!</h4>
                 <p>This was actually ${scenario.type === 'phishing' ? 'PHISHING' : 'LEGITIMATE'}.</p>
                 ${this.getExplanation(scenario)}
+                <hr style="margin:15px 0;border-top:2px dashed #ccc;">
+                ${PhishingDetector.generateDetectionHTML(detectionResult)}
             `;
         }
         
