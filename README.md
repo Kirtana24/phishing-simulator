@@ -1,82 +1,85 @@
-# 🎣 Phishing Email Simulator
+# 🎣 Phishing Attack Simulation and Detection
 
-> An interactive cybersecurity awareness tool that simulates realistic phishing email scenarios to educate users on identifying red flags and practicing safe email habits.
+> An integrated cybersecurity platform that simulates realistic phishing attacks to test user awareness, combined with automated detection mechanisms using Python to identify and classify malicious emails.
 
 ## 🚀 Live Demo
+[View the live demo](https://Kirtana24.github.io/phishing-simulator)
 
-**Try it yourself:** [https://Kirtana24.github.io/phishing-simulator](https://Kirtana24.github.io/phishing-simulator)
+---
 
-## 📋 Features
+## 📋 Project Overview
 
-| Feature | Description |
-|---------|-------------|
-| 🏦 **Bank Alert** | Simulates a fake bank security alert with urgency tactics |
-| 📱 **Social Media** | Fake login alert with domain spoofing (faceb00k) |
-| 💼 **Work Email** | Legitimate-looking HR email (tests discrimination) |
-| 🛍️ **Shopping Deal** | Fake order cancellation with payment request |
-| 💻 **Tech Support** | Fake Microsoft account security alert |
-| 🎲 **Random Mode** | Tests you with unexpected scenarios |
+This project has **two core components**:
 
-### Interactive Learning
-- ✅ **Decision Making** - Choose if an email is phishing or legitimate
-- ✅ **Instant Feedback** - Detailed explanations for every choice
-- ✅ **Score Tracking** - Gamified learning experience
-- ✅ **Red Flag Identification** - Learn what to look for
-- ✅ **Safe Practice Tips** - What to do in real situations
+### 1. 🎯 Phishing Simulation (Frontend)
+- 6+ realistic phishing scenarios (Banking, Social Media, Tech Support, Shopping)
+- Interactive decision-making with instant feedback
+- Gamified learning with score tracking
+- Educational red-flag identification
+
+### 2. 🛡️ Phishing Detection (Backend - Python)
+- **Email Content Analysis** – Detects urgency keywords, generic greetings, and threats
+- **Sender Analysis** – Identifies suspicious domains and spoofing attempts
+- **URL Inspection** – Detects malicious links, IP addresses, and suspicious TLDs
+- **Risk Scoring** – Automated scoring (0-100) with confidence levels
+- **JSON Output** – Machine-readable results for integration
 
 ---
 
 ## 🛠️ Technologies Used
 
-| Technology | Purpose |
-|------------|---------|
-| **HTML5** | Structure & content |
-| **CSS3** | Styling, animations & responsive design |
-| **JavaScript** | Logic, interactivity & DOM manipulation |
-
----
-
-## 🎯 Learning Objectives
-
-By using this simulator, users will:
-
-1. ✅ **Identify** common phishing red flags (suspicious sender, urgency, generic greetings)
-2. ✅ **Understand** different attack tactics (spoofing, social engineering, urgency)
-3. ✅ **Practice** safe email habits (verify sender, don't click suspicious links)
-4. ✅ **Build** confidence against real social engineering attacks
-5. ✅ **Recognize** legitimate vs malicious emails
+| Component | Technologies |
+|-----------|--------------|
+| **Frontend** | HTML5, CSS3, JavaScript |
+| **Backend** | Python 3 |
+| **Detection** | Pattern matching, keyword analysis, URL inspection |
 
 ---
 
 ## 📂 Project Structure
 phishing-simulator/
-├── index.html # Main webpage
+├── index.html # Main simulation interface
 ├── css/
 │ └── style.css # Styling & responsive design
-└── js/
-└── simulator.js # Core logic & scenarios
+├── js/
+│ └── simulator.js # Simulation logic & frontend detection
+├── backend/ # Python detection engine
+│ ├── detector.py # Main detection logic
+│ ├── requirements.txt # Python dependencies
+│ └── README.md # Backend documentation
+└── README.md # This file
 
-🎓 How to Use
-Select a Scenario - Choose from 6 different phishing scenarios
+📊 Detection Features
+Feature	Description
+Urgency Detection	Identifies keywords like "urgent", "immediately", "suspended"
+Domain Analysis	Checks for fake domains and spoofing attempts
+URL Inspection	Detects IP addresses, suspicious TLDs, and malicious patterns
+Risk Scoring	0-100 score with High/Medium/Low confidence
+Red Flag Reporting	Lists all detected issues with explanations
 
-1. Read the Email : Analyze the email carefully
-2. Make a decision : Click "Phishing" or "Legitimate"
-3. Learn from feedback : Read the explanations of red flags
-4. Track your score : See your progress in real time
+📊 Features
+✅ Risk scoring (0-100)
+✅ Red-flag identification
+✅ URL analysis
+✅ Domain spoofing detection
+✅ Human-readable reports
+✅ JSON output
 
+SAMPLE OUTPUT
+╔══════════════════════════════════════════════════════════════╗
+║                    PHISHING DETECTION REPORT                 ║
+╠══════════════════════════════════════════════════════════════╣
+║  Status: 🚨 PHISHING DETECTED
+║  Risk Score: 85/100
+║  Confidence: HIGH
+║  Is Phishing: True
+╠══════════════════════════════════════════════════════════════╣
+║  🔍 Detected Red Flags:                                     ║
+║    • ⚠️ Contains keyword: "urgent"
+║    • ⚠️ Suspicious sender: chase-bank.secure.com
+║    • ⚠️ Generic greeting: "dear customer"
+╚══════════════════════════════════════════════════════════════╝
 
-💡Pro Tips
-~ Hover over links to see the real URL (don't click!)
-~ Check the sender -Look for suspicious domains
-~ Watch the urgency - Real emails don't rush you
-~ Look for personalization - Legitimate emails use your name
-
-🔒 Educational Purpose
-
-⚠️ IMPORTANT: This tool is designed strictly for educational and awareness purposes.It simulates phishimg attacks to help users recognize and avoid real threats. Never use this knowledge for malicious purposes. 
-
-SCREENSHOTS
-Main Interface
-<img width="1918" height="1013" alt="image" src="https://github.com/user-attachments/assets/f2b17d75-5e4c-4d39-a831-79036a8ad099" />
-
-
+👤 Author
+Kirtana Minoy
+GitHub: Kirtana24
